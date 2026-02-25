@@ -1,0 +1,57 @@
+/* mbed Microcontroller Library
+ * Copyright (c) 2019 ARM Limited
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include "mbed.h"
+
+
+// we dont need the blinking rate as each pin has his own.
+//#define BLINKING_RATE     500ms
+
+
+// Initialise the digital pin LED1 as an output
+    DigitalOut led(LED1);
+    DigitalOut led2(LED2);
+    DigitalOut led3(LED3);
+
+
+
+void blinky1(){
+    while(true){
+        led=!led;
+        ThisThread::sleep_for(1000ms);
+    }
+}
+
+void blinky2() {
+
+    while(true){
+        led2=!led2;
+        ThisThread::sleep_for(500ms);
+    }
+}
+
+void blinky3(){
+    while(true){
+        led3=!led3;
+        ThisThread::sleep_for(2000ms);
+    }
+}
+
+
+
+int main()
+{
+   
+       Thread p1,p2,p3;
+
+       p1.start(blinky1);
+       p2.start(blinky2);
+       p3.start(blinky3);
+    
+   while(true){
+       ThisThread::sleep_for(osWaitForever);
+       
+   }
+}
